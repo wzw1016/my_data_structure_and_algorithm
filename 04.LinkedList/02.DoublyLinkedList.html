@@ -9,13 +9,18 @@
 
     const doublyLinkedList = new DoublyLinkedList()
 
-    doublyLinkedList.append('first')
-    console.log(doublyLinkedList)
-    doublyLinkedList.append('second')
-    console.log(doublyLinkedList)
-    doublyLinkedList.append('third')
-    console.log(doublyLinkedList)
+    doublyLinkedList.append({a: 1, second: 2})
+    doublyLinkedList.append('tony')
+    doublyLinkedList.append(undefined)
+    doublyLinkedList.append(null)
+    doublyLinkedList.append(['lisa', undefined])
+    console.log(doublyLinkedList.backwardToString())
+    console.log(doublyLinkedList.forwardToString())
+    console.log(doublyLinkedList.toString())
 
+    doublyLinkedList.insert(3, 'add')
+    console.log(doublyLinkedList)
+    console.log(doublyLinkedList.toString())
   </script>
 </head>
 <body>
