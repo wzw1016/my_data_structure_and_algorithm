@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DoublyLinkedList</title>
+  <script src="./js/DoublyLinkedList.js"></script>
+  <script>
+
+    const doublyLinkedList = new DoublyLinkedList()
+
+    doublyLinkedList.append({a: 1, second: 2})
+    doublyLinkedList.append('tony')
+    doublyLinkedList.append(undefined)
+    doublyLinkedList.append(null)
+    doublyLinkedList.append(['lisa', undefined])
+    console.log(doublyLinkedList.backwardToString())
+    console.log(doublyLinkedList.forwardToString())
+    console.log(doublyLinkedList.toString())
+
+    doublyLinkedList.insert(3, 'add')
+    console.log(doublyLinkedList)
+    console.log(doublyLinkedList.toString())
+  </script>
+</head>
+<body>
+  
+</body>
+</html>

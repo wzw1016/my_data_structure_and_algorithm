@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="./js/LinkedList.js"></script>
+  <script>
+    let linkedList = new LinkedList()
+    console.log(linkedList)
+    linkedList.append('abc')
+    linkedList.append('cba')
+    linkedList.append('nba')
+    console.log(linkedList)
+    console.log(linkedList.toString())
+
+    linkedList.insert(2, 'insert1')
+    console.log(linkedList)
+    console.log(linkedList.toString())
+
+    linkedList.insert(4, 'insert2')
+    console.log(linkedList)
+    console.log(linkedList.toString())
+
+    linkedList.insert(4, 'insert3')
+    console.log(linkedList)
+    console.log(linkedList.toString())
+
+    console.log(linkedList.get(4))
+    console.log(linkedList.indexOf('insert0'))
+
+    linkedList.update(3, 'ooo')
+    console.log(linkedList.toString())
+
+    linkedList.removeAt(3)
+    linkedList.removeAt(0)
+    console.log(linkedList.toString())
+
+    linkedList.remove('insert3')
+    console.log(linkedList.toString())
+
+    console.log(linkedList)
+    console.log(linkedList.isEmpty())
+    console.log(linkedList.size())
+  </script>
+</head>
+<body>
+  
+</body>
+</html>
