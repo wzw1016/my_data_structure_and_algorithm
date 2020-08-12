@@ -62,9 +62,23 @@
     }
 
     DoublyLinkedList.prototype.insert = function(position, data) {
-      if (position > this.length) return false
-
       const newNode = new Node(data)
+      if (this.length === 0) {
+        this.head = newNode
+        this.tail = newNode
+        this.length += 1
+        return true
+      }
+      if (position < 0 || position >= this.length) return false
+
+      if (position === 0) {
+        this.head.prev = newNode
+        newNode.next = this.head
+        this.head = newNode
+        this.length += 1
+        return true
+      }
+
       let current = this.head
       let i = 0
       while(i < position) {
@@ -80,6 +94,74 @@
       this.length += 1
       return true
     }
+
+    DoublyLinkedList.prototype.get = function(position) {
+      if (position < 0 || position >= this.length) return null
+
+      let current = this.head
+      let i = 0
+      while(i < position) {
+        current = current.next
+        i += 1
+      }
+      return current.data
+    }
+
+    DoublyLinkedList.prototype.indexOf = function(data) {
+      
+      let current = this.head
+      let index = 0
+      while(current) {
+        if (current.data === data) return index
+        current = current.next
+        index += 1
+      }
+      if (current === null && index === this.length) return -1
+    }
+
+    DoublyLinkedList.prototype.update = function(position, data) {
+      if (position < 0 || position >= this.length) return false
+
+      let current = this.head
+      let i = 0
+      while(i < position) {
+        current = current.next
+        i += 1
+      }
+      current.data = data
+      return true
+    }
+
+    DoublyLinkedList.prototype.removeAt = function(position) {
+      if (position < 0 || position >= this.length) return false
+      if (position === this.length - 1) {
+        this.tail = this.tail.prev
+        this.tail.next = null
+        this.length -= 1
+        return true
+      }
+
+      let current = this.head
+      let i = 0
+      while(i < position) {
+        current = current.next
+        i += 1
+      }
+      const willBeRemovedNode = current
+      const prevNode = willBeRemovedNode.prev
+      const nextNode = willBeRemovedNode.next
+
+      prevNode.next = nextNode
+      nextNode.prev = prevNode
+
+      this.length -= 1
+      return true
+    }
+
+    /* DoublyLinkedList.prototype.remove = function(data) {
+      if(this.indexOf(data) === -1) return false
+
+    } */
   }
 
   window.DoublyLinkedList = DoublyLinkedList
