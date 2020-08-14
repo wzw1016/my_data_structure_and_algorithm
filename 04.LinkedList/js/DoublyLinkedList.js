@@ -98,11 +98,28 @@
     DoublyLinkedList.prototype.get = function(position) {
       if (position < 0 || position >= this.length) return null
 
-      let current = this.head
-      let i = 0
-      while(i < position) {
-        current = current.next
-        i += 1
+      let current
+      let i
+      if (position < (this.length - 1) / 2) {
+        current = this.head
+        i = 0
+        while(i < position) {
+          current = current.next
+          i += 1
+        }
+      } else {
+        /* current = this.tail
+        i = 0
+        while(i < (this.length - 1) - position) {
+          current = current.prev
+          i += 1
+        } */
+        current = this.tail
+        i = this.length - 1
+        while(i > position) {
+          current = current.prev
+          i -= 1
+        }
       }
       return current.data
     }
@@ -121,12 +138,23 @@
 
     DoublyLinkedList.prototype.update = function(position, data) {
       if (position < 0 || position >= this.length) return false
-
-      let current = this.head
-      let i = 0
-      while(i < position) {
-        current = current.next
-        i += 1
+      
+      let current
+      let i
+      if (position < (this.length - 1) / 2) {
+        current = this.head
+        i = 0
+        while(i < position) {
+          current = current.next
+          i += 1
+        }
+      } else {
+        current = this.tail
+        i = this.length - 1
+        while(i < position) {
+          current = current.prev
+          i -= 1
+        }
       }
       current.data = data
       return true
