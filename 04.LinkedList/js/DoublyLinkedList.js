@@ -63,7 +63,7 @@
 
     DoublyLinkedList.prototype.insert = function(position, data) {
       const newNode = new Node(data)
-      if (this.length === 0) {
+      if (this.length === 0 && position === 0) {
         this.head = newNode
         this.tail = newNode
         this.length += 1
