@@ -162,6 +162,17 @@
 
     DoublyLinkedList.prototype.removeAt = function(position) {
       if (position < 0 || position >= this.length) return false
+
+      if (this.length === 1) {
+        this.length -= 1
+        return !(this.head = this.tail = null)
+      }
+      if (position === 0) {
+        this.head = this.head.next
+        this.head.prev = null
+        this.length -= 1
+        return true
+      }
       if (position === this.length - 1) {
         this.tail = this.tail.prev
         this.tail.next = null
@@ -186,10 +197,28 @@
       return true
     }
 
-    /* DoublyLinkedList.prototype.remove = function(data) {
-      if(this.indexOf(data) === -1) return false
+    DoublyLinkedList.prototype.remove = function(data) {
+      const index = this.indexOf(data)
+      if(index === -1) return false
 
-    } */
+      return this.removeAt(index)
+    }
+
+    DoublyLinkedList.prototype.isEmpty = function() {
+      return this.length === 0
+    }
+
+    DoublyLinkedList.prototype.size = function() {
+      return this.length
+    }
+
+    DoublyLinkedList.prototype.getHead = function() {
+      return this.head.data
+    }
+
+    DoublyLinkedList.prototype.getTail = function() {
+      return this.tail.data
+    }
   }
 
   window.DoublyLinkedList = DoublyLinkedList
