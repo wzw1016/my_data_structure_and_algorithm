@@ -26,6 +26,14 @@
     console.log(set.intersection(set2).values())
     console.log(set.residual(set2).values())
 
+    const set3 = new Set()
+    set3.add(1)
+    set3.add('dd')
+    set3.add(12)
+
+    console.log(set3.subset(set))
+    console.log(set3.subset(set2))
+
   </script>
 </head>
 <body>

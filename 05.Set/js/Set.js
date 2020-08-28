@@ -64,11 +64,11 @@
     }
 
     Set.prototype.subset = function(set) {
-      const residualSet = new Set()
+      if (this.length > set.length) return false
       for (const key in this['[[Entries]]']) {
-        !set.has(key) && residualSet.add(key)
+        if (!set.has(key)) return false
       }
-      return residualSet
+      return true
     }
   }
 
