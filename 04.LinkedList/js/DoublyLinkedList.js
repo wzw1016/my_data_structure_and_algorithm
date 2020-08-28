@@ -63,7 +63,7 @@
 
     DoublyLinkedList.prototype.insert = function(position, data) {
       const newNode = new Node(data)
-      if (this.length === 0) {
+      if (this.length === 0 && position === 0) {
         this.head = newNode
         this.tail = newNode
         this.length += 1
@@ -162,6 +162,17 @@
 
     DoublyLinkedList.prototype.removeAt = function(position) {
       if (position < 0 || position >= this.length) return false
+
+      if (this.length === 1) {
+        this.length -= 1
+        return !(this.head = this.tail = null)
+      }
+      if (position === 0) {
+        this.head = this.head.next
+        this.head.prev = null
+        this.length -= 1
+        return true
+      }
       if (position === this.length - 1) {
         this.tail = this.tail.prev
         this.tail.next = null
@@ -187,11 +198,26 @@
     }
 
     DoublyLinkedList.prototype.remove = function(data) {
-      const position = this.indexOf(data)
-      if(position === -1) return false
+      const index = this.indexOf(data)
+      if(index === -1) return false
 
-      this.removeAt(position)
-      return true
+      return this.removeAt(index)
+    }
+
+    DoublyLinkedList.prototype.isEmpty = function() {
+      return this.length === 0
+    }
+
+    DoublyLinkedList.prototype.size = function() {
+      return this.length
+    }
+
+    DoublyLinkedList.prototype.getHead = function() {
+      return this.head.data
+    }
+
+    DoublyLinkedList.prototype.getTail = function() {
+      return this.tail.data
     }
   }
 
