@@ -186,10 +186,13 @@
       return true
     }
 
-    /* DoublyLinkedList.prototype.remove = function(data) {
-      if(this.indexOf(data) === -1) return false
+    DoublyLinkedList.prototype.remove = function(data) {
+      const position = this.indexOf(data)
+      if(position === -1) return false
 
-    } */
+      this.removeAt(position)
+      return true
+    }
   }
 
   window.DoublyLinkedList = DoublyLinkedList
