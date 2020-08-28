@@ -10,7 +10,21 @@
     const set = new Set()
     console.log(set.has(1))
     console.log(set.add('1'))
+    console.log(set.add(2))
+    console.log(set.add('dd'))
     console.log(set.values())
+
+    const set2 = new Set()
+    set2.add(12)
+    set2.add('dd')
+    set2.add(28)
+    set2.add(3)
+    set2.add(1)
+    console.log(set2.values())
+
+    console.log(set.union(set2).values())
+    console.log(set.intersection(set2).values())
+    console.log(set.residual(set2).values())
 
   </script>
 </head>

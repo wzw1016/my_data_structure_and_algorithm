@@ -33,6 +33,43 @@
     Set.prototype.clear = function(data) {
       return this['[[Entries]]'] = {}
     }
+
+    Set.prototype.union = function(set) {
+      const unionSet = new Set()
+      for (const key in this['[[Entries]]']) {
+        unionSet.add(key)
+      }
+
+      for (const key in set['[[Entries]]']) {
+        unionSet.add(key)
+      }
+      return unionSet
+    }
+
+    Set.prototype.intersection = function(set) {
+      const intersectSet = new Set()
+      for (const key in this['[[Entries]]']) {
+        set.has(key) && intersectSet.add(key)
+      }
+      
+      return intersectSet
+    }
+
+    Set.prototype.residual = function(set) {
+      const residualSet = new Set()
+      for (const key in this['[[Entries]]']) {
+        !set.has(key) && residualSet.add(key)
+      }
+      return residualSet
+    }
+
+    Set.prototype.subset = function(set) {
+      const residualSet = new Set()
+      for (const key in this['[[Entries]]']) {
+        !set.has(key) && residualSet.add(key)
+      }
+      return residualSet
+    }
   }
 
   window.Set = Set
