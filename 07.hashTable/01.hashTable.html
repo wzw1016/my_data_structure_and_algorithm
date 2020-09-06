@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>hashTable</title>
+  <script src="./js/hashTable.js"></script>
+  <script>
+    const ht = new hashTable()
+    console.log(ht)
+
+    ht.put('abc', 123)
+    ht.put('wzw', '1')
+    ht.put('hhh', false)
+
+    console.log(ht)
+
+    ht.remove('hhh')
+    console.log(ht)
+
+    console.log(ht.get('hhh'))
+    console.log(ht.get('wzw'))
+
+    ht.put('00h', false)
+    console.log(ht)
+
+    ht.put('0zh', false)
+    console.log(ht)
+
+    ht.put('0sfdvh', false)
+    console.log(ht)
+
+    // will resize
+    ht.put('0szzzh', false)
+    console.log(ht)
+  </script>
+</head>
+<body>
+  
+</body>
+</html>
