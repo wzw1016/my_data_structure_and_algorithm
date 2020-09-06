@@ -34,7 +34,7 @@
       this.storage[index].push([key, value])
       this.count += 1
       
-      // 判断 是否需要执行扩容操作（当loadFatory大于0.75时）
+      // 判断 是否需要执行扩容操作（当loadFactor大于0.75时）
       if ((this.count / this.limit) * 100 > 75) this.resize(this.limit * 2)
       return true
     }
@@ -70,8 +70,8 @@
             this.storage[index] = null
           }
 
-          // 判断 是否需要执行扩容操作（当loadFatory大于0.75时）
-          if (this.limit > 7 && (this.count / this.limit) * 100 > 75) this.resize(Math.floor(this.limit / 2))
+          // 判断 是否需要执行减容操作（当loadFactor小于0.25时）
+          if (this.limit > 7 && (this.count / this.limit) * 100 < 25) this.resize(Math.floor(this.limit / 2))
 
           return value
         }
