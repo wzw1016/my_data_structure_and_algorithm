@@ -5,11 +5,22 @@
     this.count = 0
     this.limit = 7
 
+    function isPrime(number) {
+      if (number <= 1) return false
+
+      for (let index = 2; index <= Math.floor(Math.sqrt(number)) ; index++) {
+        if (number % index === 0) return false
+      }
+      return true
+    }
+
     // 对传入标识进行散列化的函数
     hashTable.prototype.hashFunction = function (key, size) {
       let hashCode = 0
+
+      //利用霍纳法则（秦九韶算法）将计算hashCode的时间复杂度由O(N^2)降低到O(N)
       for (let index = 0; index < key.length; index++) {
-        hashCode = 37 * hashCode + key.charCodeAt(index) 
+        hashCode = 37 * hashCode + key.charCodeAt(index)
       }
       const index = hashCode % size
       return index
@@ -34,8 +45,15 @@
       this.storage[index].push([key, value])
       this.count += 1
       
-      // 判断 是否需要执行扩容操作（当loadFactor大于0.75时）
-      if ((this.count / this.limit) * 100 > 75) this.resize(this.limit * 2)
+      // 判断 是否需要执行扩容操作，扩容后的散列表容量仍为质数（当loadFactor大于0.75时）
+      if ((this.count / this.limit) * 100 > 75) {
+        this.limit = this.limit * 2 + 1
+        while(!isPrime(this.limit)) {
+          this.limit += 1
+        }
+        this.resize(this.limit)
+      }
+      
       return true
     }
 
@@ -70,9 +88,19 @@
             this.storage[index] = null
           }
 
-          // 判断 是否需要执行减容操作（当loadFactor小于0.25时）
-          if (this.limit > 7 && (this.count / this.limit) * 100 < 25) this.resize(Math.floor(this.limit / 2))
+          // 判断 是否需要执行减容操作，减容后的散列表容量仍为质数（当loadFactor小于0.25时）
+          if (this.limit > 7 && (this.count / this.limit) * 100 < 25) {
+            this.limit = Math.floor(this.limit / 2)
+            while(!isPrime(this.limit)) {
+              this.limit -= 1
+            }
 
+            if (this.limit < 7) {
+              this.resize(7)
+            } else {
+              this.resize(this.limit)
+            }
+          }
           return value
         }
       }
