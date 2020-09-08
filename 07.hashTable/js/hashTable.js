@@ -5,15 +5,6 @@
     this.count = 0
     this.limit = 7
 
-    function isPrime(number) {
-      if (number <= 1) return false
-
-      for (let index = 2; index <= Math.floor(Math.sqrt(number)) ; index++) {
-        if (number % index === 0) return false
-      }
-      return true
-    }
-
     // 对传入标识进行散列化的函数
     hashTable.prototype.hashFunction = function (key, size) {
       let hashCode = 0
@@ -47,10 +38,7 @@
       
       // 判断 是否需要执行扩容操作，扩容后的散列表容量仍为质数（当loadFactor大于0.75时）
       if ((this.count / this.limit) * 100 > 75) {
-        this.limit = this.limit * 2 + 1
-        while(!isPrime(this.limit)) {
-          this.limit += 1
-        }
+        this.limit = this.getPrime(this.limit * 2 + 1)
         this.resize(this.limit)
       }
       
@@ -90,16 +78,8 @@
 
           // 判断 是否需要执行减容操作，减容后的散列表容量仍为质数（当loadFactor小于0.25时）
           if (this.limit > 7 && (this.count / this.limit) * 100 < 25) {
-            this.limit = Math.floor(this.limit / 2)
-            while(!isPrime(this.limit)) {
-              this.limit -= 1
-            }
-
-            if (this.limit < 7) {
-              this.resize(7)
-            } else {
-              this.resize(this.limit)
-            }
+            this.limit = this.getPrime(Math.floor(this.limit / 2))
+            this.resize(this.limit)
           }
           return value
         }
@@ -132,6 +112,23 @@
           this.put(oldTuple[0], oldTuple[1])
         }
       }
+    }
+
+    // 判断传入数字是否是质数的辅助方法
+    hashTable.prototype.isPrime = function(num) {
+      if (num <= 1) return false
+      for (let index = 2; index < Math.floor(Math.sqrt(num)); index++) {
+        if (num % index === 0) return false
+      }
+      return true
+    }
+
+    // 获取第一个大于所传入数字的质数的辅助方法
+    hashTable.prototype.getPrime = function(num) {
+      while(!this.isPrime(num)) {
+        num += 1
+      }
+      return num
     }
   }
 
