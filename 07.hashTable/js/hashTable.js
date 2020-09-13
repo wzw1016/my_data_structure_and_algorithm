@@ -1,12 +1,12 @@
 (function() {
 
-  function hashTable () {
+  function HashTable () {
     this.storage = []
     this.count = 0
     this.limit = 7
 
     // 对传入标识进行散列化的函数
-    hashTable.prototype.hashFunction = function (key, size) {
+    HashTable.prototype.hashFunction = function (key, size) {
       let hashCode = 0
 
       //利用霍纳法则（秦九韶算法）将计算hashCode的时间复杂度由O(N^2)降低到O(N)
@@ -19,7 +19,7 @@
 
 
     // 新增 / 修改
-    hashTable.prototype.put = function (key, value) {
+    HashTable.prototype.put = function (key, value) {
       const index = this.hashFunction(key, this.limit)
       let bucket = this.storage[index]
 
@@ -46,7 +46,7 @@
     }
 
     // 查询
-    hashTable.prototype.get = function(key) {
+    HashTable.prototype.get = function(key) {
       const index = this.hashFunction(key, this.limit)
       const bucket = this.storage[index]
 
@@ -61,7 +61,7 @@
     }
 
     // 删除
-    hashTable.prototype.remove = function(key) {
+    HashTable.prototype.remove = function(key) {
       const index = this.hashFunction(key, this.limit)
       const bucket = this.storage[index]
 
@@ -87,15 +87,15 @@
       return null
     }
 
-    hashTable.prototype.isEmpty = function() {
+    HashTable.prototype.isEmpty = function() {
       return this.count === 0
     }
 
-    hashTable.prototype.size = function() {
+    HashTable.prototype.size = function() {
       return this.count
     }
 
-    hashTable.prototype.resize = function(newLimit) {
+    HashTable.prototype.resize = function(newLimit) {
       const oldStorage = this.storage
 
       // 重置散列表
@@ -115,7 +115,7 @@
     }
 
     // 判断传入数字是否是质数的辅助方法
-    hashTable.prototype.isPrime = function(num) {
+    HashTable.prototype.isPrime = function(num) {
       if (num <= 1) return false
       for (let index = 2; index < Math.floor(Math.sqrt(num)); index++) {
         if (num % index === 0) return false
@@ -124,7 +124,7 @@
     }
 
     // 获取第一个大于所传入数字的质数的辅助方法
-    hashTable.prototype.getPrime = function(num) {
+    HashTable.prototype.getPrime = function(num) {
       while(!this.isPrime(num)) {
         num += 1
       }
@@ -132,5 +132,5 @@
     }
   }
 
-  window.hashTable = hashTable
+  window.HashTable = HashTable
 })(window)

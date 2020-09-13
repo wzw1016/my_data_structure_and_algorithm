@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BinarySearchTree</title>
+  <script src="./js/BinarySearchTree.js"></script>
+  <script>
+
+    const bst = new BinarySearchTree()
+
+    bst.insert(12)
+    bst.insert(9)
+    bst.insert(3)
+    bst.insert(11)
+    bst.insert(15)
+    bst.insert(17)
+    bst.insert(19)
+    bst.insert(16)
+
+    console.log(bst)
+
+    let btsPrevString = ''
+    bst.prevOrderTraversal((key) => {
+      btsPrevString += key + ' '
+    })
+    console.log('btsPrevString : ' + btsPrevString)
+
+    let bstInString = ''
+    bst.inOrderTraversal((key) => {
+      bstInString += key + ' '
+    })
+    console.log('bstInString : ' + bstInString)
+
+    let btsPostString = ''
+    bst.postOrderTraversal((key) => {
+      btsPostString += key + ' '
+    })
+    console.log('btsPostString : ' + btsPostString)
+
+    console.log('min : ' + bst.min())
+    console.log('max : ' + bst.max())
+    console.log(bst.has(88))
+    console.log(bst.has(15))
+    console.log(bst.has(3))
+    console.log(bst.has(10))
+
+    
+  </script>
+</head>
+<body>
+  
+</body>
+</html>
