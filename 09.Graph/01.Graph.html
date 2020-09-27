@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Graph</title>
+  <script src="../03.Queue/js/Queue.js"></script>
   <script src="./js/Graph.js"></script>
   <script>
     let graph = new Graph()
@@ -25,6 +26,14 @@
     graph.addEdge('E', 'I')
 
     console.log(graph.toString())
+
+    console.log(graph.initializeColor())
+
+    let breadthFirstSearchString = ''
+    graph.breadthFirstSearch(graph.vertexs[0], (vertex) => {
+      breadthFirstSearchString += vertex + ' '
+    })
+    console.log(breadthFirstSearchString)
   </script>
 </head>
 <body>

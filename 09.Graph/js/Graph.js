@@ -33,4 +33,37 @@ class Graph {
     }
     return resultString
   }
+
+  initializeColor() {
+    let color = {}
+    for (const i of this.vertexs) {
+      color[i] = 'white'
+    }
+    return color
+  }
+
+  breadthFirstSearch(originVetex, handler) {
+
+    const color = this.initializeColor()
+
+    const queue = new Queue()
+    queue.enqueue(originVetex)
+    
+    while(!queue.isEmpty()) {
+      const dequeueVertex =  queue.dequeue()
+
+      const relationalVertexs = this.edges[dequeueVertex]
+      color[dequeueVertex] = 'gray'
+      for (const relationalVertex of relationalVertexs) {
+        if (color[relationalVertex] === 'white') {
+          color[relationalVertex] = 'gray'
+          queue.enqueue(relationalVertex)
+        }
+      }
+
+      handler(dequeueVertex)
+
+      color[dequeueVertex] = 'black'
+    }
+  }
 }
