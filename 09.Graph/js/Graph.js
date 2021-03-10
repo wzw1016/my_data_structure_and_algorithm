@@ -42,12 +42,12 @@ class Graph {
     return color
   }
 
-  breadthFirstSearch(originVetex, handler) {
+  breadthFirstSearch(originVertex, handler) {
 
     const color = this.initializeColor()
 
     const queue = new Queue()
-    queue.enqueue(originVetex)
+    queue.enqueue(originVertex)
     
     while(!queue.isEmpty()) {
       const dequeueVertex =  queue.dequeue()
@@ -65,5 +65,27 @@ class Graph {
 
       color[dequeueVertex] = 'black'
     }
+  }
+
+  depthFirstSearch(originalVertex, handler) {
+    const colors = this.initializeColor()
+
+    this.depthFirstSearchVisitVertex(originalVertex, colors, handler)
+  }
+
+  depthFirstSearchVisitVertex(vertex, colors, handler) {
+
+    colors[vertex] = 'gray'
+
+    handler(vertex)
+
+    const relationalVertexs = this.edges[vertex]
+    for (const relationalVertex of relationalVertexs) {
+      if (colors[relationalVertex] === 'white') {
+        this.depthFirstSearchVisitVertex(relationalVertex, colors, handler)
+      }
+    }
+
+    colors[vertex] = 'black'
   }
 }

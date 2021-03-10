@@ -33,7 +33,13 @@
     graph.breadthFirstSearch(graph.vertexs[0], (vertex) => {
       breadthFirstSearchString += vertex + ' '
     })
-    console.log(breadthFirstSearchString)
+    console.log('breadthFirstSearchString : ', breadthFirstSearchString)
+
+    let depthFirstSearchString = ''
+    graph.depthFirstSearch(graph.vertexs[0], (vertex) => {
+      depthFirstSearchString += vertex + ' '
+    })
+    console.log('depthFirstSearchString : ', depthFirstSearchString)
   </script>
 </head>
 <body>
